@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adisun FZ-LLC</title>
+<style>
+  :root{
+    --adisun-blue: #526fff;
+    --ink:#15181B;
+    --navy:#1B2530;
+    --olive:#9CB833;
+    --paper:#EEECE6;
+    --paper-dim:#E2DFD6;
+    --hazard:#F2B705;
+    --rust:#C8501B;
+    --steel:#4A5158;
+    --line: rgba(21,24,27,0.12);
+    --mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+    --disp: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    --body: 'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{ background:#fff; color:var(--ink); font-family:var(--body); line-height:1.5; }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit; cursor:pointer;}
+
+  /* ---------- Header ---------- */
+  header.site{
+    background:var(--paper); color:#000;
+  }
+  .header-inner{
+    max-width:1200px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 24px;
+  }
+  .logo{
+    width: 10vw;
+  }
+  .logo .accent{ color:var(--olive); font-weight:400; }
+  nav.main-nav{ display:flex; gap:30px; align-items:center; }
+  nav.main-nav a{
+    font-size:14px; color:#000; display:flex; align-items:center; gap:6px;
+  }
+  nav.main-nav a:hover{ color:var(--adisun-blue); }
+  nav.main-nav .badge{
+    background:rgba(255,255,255,0.15); border-radius:50%;
+    width:18px; height:18px; font-size:11px; display:flex; align-items:center; justify-content:center;
+  }
+
+  /* ---------- Hero header image ---------- */
+.hero{
+  height: 55vh;
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
+  position:relative; /* new — establishes positioning context */
+  background:#9CB833;
+}
+.hero img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter: brightness(0.7);
+}
+.headerText{
+  position:absolute;
+  font-weight: bold;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  color: #fff;
+  text-align:center;
+  font-family:var(--body);
+  font-weight:300;
+  font-size:32px;
+  line-height:1.4;
+  max-width:70%;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.4); /* keeps text legible over busy photo areas */
+  margin:0;
+  z-index:1;
+}
+  .hero h1{ font-family:var(--body); font-weight:300; font-size:44px; letter-spacing:1px; }
+
+  /* ---------- Carousel strip ---------- */
+  .carousel-strip{
+    background:#F7F6F3; text-align:center; padding:22px 24px;
+  }
+  .carousel-strip h2{ font-weight:400; font-size:22px; margin-bottom:14px; }
+  .dots{ display:flex; justify-content:center; gap:8px; }
+  .dots span{ width:8px; height:8px; border-radius:50%; background:#cfcfc7; }
+  .dots span.active{ background:#8a8a80; }
+
+  /* ---------- Icon row ---------- */
+  .icon-row{
+    max-width:1100px; margin:0 auto; padding:70px 24px;
+    display:grid; grid-template-columns:repeat(4,1fr); gap:40px;
+    text-align:center;
+  }
+  .icon-row .item svg{ width:42px; height:42px; stroke:#c9c9c2; margin-bottom:16px; }
+  .icon-row h3{ font-weight:400; font-size:22px; margin-bottom:12px; }
+  .icon-row p{ font-size:13.5px; color:#7a7a72; line-height:1.7; }
+
+  /* ---------- Amazing title section ---------- */
+.info-block{
+  background: #cae8ff; color:#000;   
+  padding:80px 18px;
+  text-align:center;
+}
+.info-block h2{
+  font-weight:400;
+  font-size:30px;
+  margin-bottom:50px;
+}
+.info-block-bottom{
+  max-width:800px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  gap:60px;
+}
+.info-block-bottom .pitch{
+  flex:1;
+  text-align:center;
+  color:#1c1c1c;
+  font-size:24px;
+  line-height:1.8;
+}
+.contact-list{
+  flex:1;
+  list-style:none;
+  margin:0;
+  padding:0;
+  text-align:left;
+}
+.contact-list li{
+  color:#000;
+  font-size:18px;
+  line-height:1.8;
+}
+.contact-list li strong{
+  color:var(--ink);
+}
+  /* ---------- Our Products section ---------- */
+  .products{ padding:40px 24px; }
+  .products-inner{ max-width:1300px; margin:0 auto; }
+  .products h2{ text-align:center; font-weight:400; font-size:30px; margin-bottom:44px; }
+
+  .product-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    grid-template-rows:repeat(2,auto);
+    gap:5px;
+    /* background:var(--line); */
+    /* border:1px solid var(--line); */
+  }
+  .p-card{
+    /* background:var(--paper-dim); */
+    display:flex; flex-direction:column;
+  }
+  .p-card .thumb{
+    aspect-ratio:1/1;
+    /* background:var(--paper-dim); */
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .p-card .thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+  .p-card .thumb svg{ width:44%; height:44%; stroke:var(--steel); fill:none; stroke-width:2; }
+  .p-card .body{
+    padding:24px; flex:1; display:flex; flex-direction:column;
+  }
+  .p-card .cat{
+    font-family:var(--mono); font-size:10.5px; color:var(--adisun-blue);
+    letter-spacing:1.5px; text-transform:uppercase; margin-bottom:10px;
+  }
+  .p-card h3{
+    font-family:var(--disp); font-weight:700; font-size:20px; text-transform:uppercase;
+    letter-spacing:0.3px; margin-bottom:10px;
+  }
+  .p-card .desc{ font-size:13px; color:var(--steel); margin-bottom:20px; flex:1; }
+  .p-card .row{ display:flex; align-items:center; justify-content:space-between; }
+  /* Price display is optional — uncomment .price rule and span below to show pricing
+  .p-card .price{ font-family:var(--mono); font-weight:600; font-size:15px; }
+  */
+  .p-card .more-info{
+    background:var(--ink); color:var(--paper);
+    border:none; padding:10px 16px; font-family:var(--mono); font-size:11px;
+    letter-spacing:1px; text-transform:uppercase; width:100%;
+    text-align:center; transition:0.2s;
+  }
+  .p-card .more-info:hover{ background:var(--adisun-blue); }
+
+  /* ---------- Bottom template section ---------- */
+  .template-block{
+    background:#F7F6F3; text-align:center; padding:80px 24px;
+  }
+  .template-block h2{ font-weight:400; font-size:26px; margin-bottom:16px; }
+  .template-block p{ max-width:640px; margin:0 auto 20px; color:#7a7a72; font-size:14px; line-height:1.8; }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:24px; display:flex; justify-content:space-between; align-items:center;
+    max-width:1100px; margin:0 auto; font-size:12.5px; color:#7a7a72; flex-wrap:wrap; gap:10px;
+  }
+  footer a{ color:var(--olive); }
+
+  @media (max-width:980px){
+    .icon-row{ grid-template-columns:repeat(2,1fr); }
+    .product-grid{ grid-template-columns:repeat(2,1fr); grid-template-rows:repeat(4,auto); }
+  }
+  @media (max-width:640px){
+    nav.main-nav{ display:none; }
+    .icon-row{ grid-template-columns:1fr; }
+    .product-grid{ grid-template-columns:1fr; grid-template-rows:repeat(8,auto); }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site">
+  <div class="header-inner">
+    <img src="WebsiteAssets/adisunEnhanced.png" alt="Site Logo" class="logo">
+    <nav class="main-nav">
+      <a href="#">Home</a>
+      <a href="#products">Products</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= HERO / HEADER IMAGE ================= -->
+<div class="hero">
+    <img src="WebsiteAssets/headerImage.jpeg" alt="Header Image">
+    <p class="headerText">Delivering Maintenance Products That Save Downtime and Reduce Costs.</p>
+</div>
+
+<!-- ================= OUR PRODUCTS ================= -->
+<section class="products" id="products">
+  <div class="products-inner">
+    <h2>Our Products</h2>
+    <div class="product-grid" id="productGrid"></div>
+  </div>
+</section>
+
+<!-- ================= CONTACT DETAILS ================= -->
+<div class="info-block">
+  <h2>Contact Us</h2>
+  <div class="info-block-bottom">
+    <p class="pitch">For business solutions,<br> get in touch with us here.</p>
+    <ul class="contact-list">
+      <li><strong>Company Name</strong> Adisun FZ-LLC</li>
+      <li><strong>Phone</strong> +971 50 474 7249</li>
+      <li><strong>Email</strong> business@adisun.com</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer id="contact">
+  <span>Copyright 2026, Your Company</span>
+  <a href="#">Design and coding by Your Team</a>
+</footer>
+
+<script>
+/* ---------------- Product data ---------------- */
+const products = [
+  { id:'p1', name:'Quick Crete',            desc:'Rapid concrete patch and waterproofing compound.',          img:'WebsiteAssets/Quick crete.png',  link:'quickCreteIndex.html' },
+  { id:'p2', name:'Clear Seal',             desc:'Transparent penetrating waterproofing agent.',              img:'WebsiteAssets/Clear Seal.png',   link:'clearSealIndex.html' },
+  { id:'p3', name:'Puro Clean',             desc:'Multi-surface rust and stain remover concentrate.',         img:'WebsiteAssets/PuroClean.png',    link:'puroCleanIndex.html' },
+  { id:'p4', name:'Rust Seal',              desc:'Converts rust to a paintable protective layer.',            img:'WebsiteAssets/Rust Seal.png',    link:'rustSealIndex.html' },
+  { id:'p5', name:'SealPro Tape',           desc:'Self-fusing sealing tape for pipes and joints.',            img:'WebsiteAssets/Seal Pro.png',     link:'sealProTapeIndex.html' },
+  { id:'p6', name:'SteelFix Pro',           desc:'Rapid-set steel-reinforced epoxy putty.',                   img:'WebsiteAssets/SteelFix Pro.png', link:'steelFixProIndex.html' },
+  { id:'p7', name:'AquaFix Pro',            desc:'Underwater-cure repair epoxy for metal and PVC.',           img:'WebsiteAssets/AqualFix Pro.png', link:'aquaFixProIndex.html' },
+  { id:'p8', name:'BioBloc FOG Treatment',  desc:'Bio-enzyme blocker for fat, oil and grease buildup.',       img:'WebsiteAssets/mesh_bg.png',      link:'bioBlocFOGTreatmentIndex.html' },
+
+];
+
+/* Fallback icon shown only if a product's image fails to load */
+const fallbackIconSvg = `<svg viewBox="0 0 64 64"><rect x="16" y="12" width="32" height="40" rx="3"/><line x1="16" y1="24" x2="48" y2="24"/><line x1="24" y1="12" x2="24" y2="24"/><line x1="40" y1="12" x2="40" y2="24"/></svg>`;
+
+const grid = document.getElementById('productGrid');
+grid.innerHTML = products.map(p => `
+  <div class="p-card">
+    <div class="thumb"><img src="${p.img}" alt="${p.name}" loading="lazy"></div>
+    <div class="body">
+
+      <h3>${p.name}</h3>
+      <p class="desc">${p.desc}</p>
+      <div class="row">
+        <a class="more-info" href="${p.link}">More Info</a>
+      </div>
+    </div>
+  </div>
+`).join('');
+
+grid.addEventListener('click', e => {
+  const btn = e.target.closest('.more-info');
+  if(!btn) return;
+  const p = products.find(x => x.id === btn.dataset.id);
+  alert(`${p.name}\n${p.desc}`);
+});
+</script>
+</body>
+</html>

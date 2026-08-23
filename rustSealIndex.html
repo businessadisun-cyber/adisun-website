@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rust Seal — Adisun FZ-LLC</title>
+<style>
+  :root{
+    --adisun-blue: #526fff;
+    --ink:#15181B;
+    --navy:#1B2530;
+    --olive:#9CB833;
+    --paper:#EEECE6;
+    --paper-dim:#E2DFD6;
+    --hazard:#F2B705;
+    --rust:#C8501B;
+    --steel:#4A5158;
+    --line: rgba(21,24,27,0.12);
+    --mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+    --disp: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    --body: 'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{ background:#fff; color:var(--ink); font-family:var(--body); line-height:1.5; }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit; cursor:pointer;}
+
+  /* ---------- Header ---------- */
+  header.site{
+    background:var(--paper); color:#000;
+  }
+  .header-inner{
+    max-width:1200px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 24px;
+  }
+  .logo{
+    width: 10vw;
+  }
+  .logo .accent{ color:var(--olive); font-weight:400; }
+  nav.main-nav{ display:flex; gap:30px; align-items:center; }
+  nav.main-nav a{
+    font-size:14px; color:#000; display:flex; align-items:center; gap:6px;
+  }
+  nav.main-nav a:hover{ color:var(--adisun-blue); }
+  nav.main-nav .badge{
+    background:rgba(255,255,255,0.15); border-radius:50%;
+    width:18px; height:18px; font-size:11px; display:flex; align-items:center; justify-content:center;
+  }
+
+  /* ---------- Product detail section (replaces hero + product grid) ---------- */
+  .product-detail{
+    max-width:1200px; margin:0 auto;
+    padding:60px 24px 90px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:start;
+  }
+  .product-detail .image-col img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    background:var(--paper-dim);
+  }
+  .product-detail .text-col{
+    padding-right:12px;
+  }
+  .product-detail .cat{
+    font-family:var(--mono); font-size:11px; color:var(--adisun-blue);
+    letter-spacing:1.5px; text-transform:uppercase; margin-bottom:14px;
+  }
+  .product-detail h1{
+    font-family:var(--disp); font-weight:700; font-size:42px;
+    text-transform:uppercase; letter-spacing:0.3px;
+    margin-bottom:24px;
+    line-height:1.05;
+  }
+  .product-detail .details{
+    color:var(--steel); font-size:18px; line-height:1.9;
+  }
+  .product-detail .details p{
+    margin-bottom:18px;
+  }
+  .product-detail .details p strong{
+    color:var(--ink);
+  }
+/*--------------Section Headings -------------- */
+  .product-detail h2.section-heading{
+    font-family:var(--disp); font-weight:700; font-size:22px;
+    text-transform:uppercase; letter-spacing:0.3px;
+    color:var(--ink);
+    margin:32px 0 14px;
+  }
+/*--------------Feature / Application Lists -------------- */
+  .feature-list{
+    margin-bottom:18px;
+  }
+  .feature-list li{
+    position:relative;
+    padding-left:20px;
+    margin-bottom:10px;
+    font-size:15px;
+    color:var(--steel);
+  }
+  .feature-list li::before{
+    content:'';
+    position:absolute;
+    left:0; top:9px;
+    width:7px; height:7px;
+    background:var(--adisun-blue);
+  }
+  .feature-list li strong{
+    color:var(--ink);
+  }
+/*-------------- Checkmark variant for Key Features -------------- */
+  .feature-list.checklist li{
+    padding-left:26px;
+  }
+  .feature-list.checklist li::before{
+    content:'\2713';
+    width:auto; height:auto;
+    background:none;
+    top:0;
+    left:0;
+    color:var(--olive);
+    font-weight:700;
+    font-size:15px;
+  }
+/*--------------Table Section -------------- */
+.spec-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+.spec-table th,
+.spec-table td{
+  text-align:left;
+  padding:12px 14px;
+  border-bottom:1px solid var(--line);
+  font-size:14px;
+}
+.spec-table th{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--adisun-blue);
+  border-bottom:2px solid var(--ink);
+}
+.spec-table td:first-child{
+  color:var(--ink);
+  font-weight:600;
+}
+.spec-table td:last-child{
+  color:var(--steel);
+}
+  /* Price display optional — uncomment to show pricing
+  .product-detail .price{ font-family:var(--mono); font-weight:600; font-size:20px; margin-top:24px; color:var(--ink); }
+  */
+  .back-link{
+    display:inline-block; margin:24px 24px 0; font-family:var(--mono); font-size:12px;
+    letter-spacing:1px; text-transform:uppercase; color:var(--steel);
+  }
+  .back-link:hover{ color:var(--adisun-blue); }
+
+  /* ---------- Contact Details (same as home page) ---------- */
+  .info-block{
+    background: #cae8ff; color:#000;
+    padding:30px 18px;
+    text-align:center;
+  }
+  .info-block h2{
+    font-weight:400;
+    font-size:30px;
+    margin-bottom:50px;
+  }
+  .info-block-bottom{
+    max-width:800px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    gap:60px;
+  }
+  .info-block-bottom .pitch{
+    flex:1;
+    text-align:center;
+    color:#1c1c1c;
+    font-size:24px;
+    line-height:1.8;
+  }
+  .contact-list{
+    flex:1;
+    list-style:none;
+    margin:0;
+    padding:0;
+    text-align:left;
+  }
+  .contact-list li{
+    color:#000;
+    font-size:18px;
+    line-height:1.8;
+  }
+  .contact-list li strong{
+    color:var(--ink);
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:24px; display:flex; justify-content:space-between; align-items:center;
+    max-width:1100px; margin:0 auto; font-size:12.5px; color:#7a7a72; flex-wrap:wrap; gap:10px;
+  }
+  footer a{ color:var(--olive); }
+
+  @media (max-width:900px){
+    .product-detail{ grid-template-columns:1fr; }
+    .product-detail .image-col{ position:static; }
+    .product-detail .text-col{ max-height:none; overflow-y:visible; padding-right:0; }
+    .info-block-bottom{ flex-direction:column; gap:30px; }
+    .info-block-bottom .pitch{ text-align:center; }
+  }
+  @media (max-width:640px){
+    nav.main-nav{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site">
+  <div class="header-inner">
+    <img src="WebsiteAssets/adisunEnhanced.png" alt="Site Logo" class="logo">
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="index.html#products">Products</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<a href="index.html#products" class="back-link">&larr; Back to Products</a>
+
+<!-- ================= PRODUCT DETAIL ================= -->
+<section class="product-detail">
+  <div class="image-col">
+    <img src="WebsiteAssets/Rust Seal.png" alt="Rust Seal">
+  </div>
+  <div class="text-col">
+    <h1>Rust Seal</h1>
+    <div class="details">
+      <p><strong>Rust Seal: Rust Conversion Agent</strong> is a high-performance, water-based acrylic formula engineered to neutralize rust and transform corroded surfaces into a stable, paintable layer. Ideal for industrial, automotive, marine, and household applications.</p>
+    </div>
+
+    <h2 class="section-heading">Key Features</h2>
+    <ul class="feature-list checklist">
+      <li>Converts rust into a protective barrier</li>
+      <li>Water-based &amp; eco-friendly</li>
+      <li>Non-flammable &amp; safe for indoor use</li>
+      <li>Easy application: brush, spray, or roller</li>
+      <li>Fast drying &amp; long-lasting performance</li>
+    </ul>
+
+    <h2 class="section-heading">Applications</h2>
+    <ul class="feature-list">
+      <li>Automotive chassis, underbody, and panels</li>
+      <li>Industrial machinery and metal structures</li>
+      <li>Marine equipment and ship hulls</li>
+      <li>Household tools, fences, and metal furniture</li>
+      <li>DIY restoration and maintenance projects</li>
+    </ul>
+
+    <h2 class="section-heading">Technical Specifications</h2>
+    <div class="details">
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Product Type</td><td>Water-based acrylic rust converter</td></tr>
+          <tr><td>Appearance</td><td>Liquid</td></tr>
+          <tr><td>Solid Content</td><td>40% – 45%</td></tr>
+          <tr><td>pH Value</td><td>2.0 – 3.5</td></tr>
+          <tr><td>Density</td><td>1.10 – 1.20 g/cc</td></tr>
+          <tr><td>Flash Point</td><td>Non-Flammable</td></tr>
+          <tr><td>Application Method</td><td>Brush, Spray, Roller</td></tr>
+          <tr><td>Coverage</td><td>3 – 4 m²/L</td></tr>
+          <tr><td>Drying Time</td><td>30–60 minutes (touch dry)</td></tr>
+          <tr><td>Curing Time</td><td>24 hours (full cure)</td></tr>
+          <tr><td>Shelf Life</td><td>18 months</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="section-heading">Packaging Details</h2>
+    <ul class="feature-list">
+      <li><strong>Pack Size</strong> — 1 kg per pail</li>
+      <li><strong>Storage Conditions</strong> — Cool, dry environment</li>
+    </ul>
+
+    <!-- <div class="price">Dhs. 0.00</div> -->
+  </div>
+</section>
+
+<!-- ================= CONTACT DETAILS ================= -->
+<div class="info-block">
+  <h2>Contact Us</h2>
+  <div class="info-block-bottom">
+    <p class="pitch">For business solutions,<br> get in touch with us here.</p>
+    <ul class="contact-list">
+      <li><strong>Company Name</strong> Adisun FZ-LLC</li>
+      <li><strong>Phone</strong> +971 50 474 7249</li>
+      <li><strong>Email</strong> business@adisun.com</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer id="contact">
+  <span>Copyright 2026, Your Company</span>
+  <a href="#">Design and coding by Your Team</a>
+</footer>
+
+</body>
+</html>
