@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MMA Dispensing Gun — Adisun FZ-LLC</title>
+<style>
+  :root{
+    --adisun-blue: #526fff;
+    --ink:#15181B;
+    --navy:#1B2530;
+    --olive:#9CB833;
+    --paper:#EEECE6;
+    --paper-dim:#E2DFD6;
+    --hazard:#F2B705;
+    --rust:#C8501B;
+    --steel:#4A5158;
+    --line: rgba(21,24,27,0.12);
+    --mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+    --disp: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    --body: 'Inter', -apple-system, sans-serif;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{ background:#fff; color:var(--ink); font-family:var(--body); line-height:1.5; }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{list-style:none;}
+  button{font-family:inherit; cursor:pointer;}
+
+  /* ---------- Header ---------- */
+  header.site{
+    background:var(--paper); color:#000;
+  }
+  .header-inner{
+    max-width:1200px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:20px 24px;
+  }
+  .logo{
+    width: 10vw;
+  }
+  .logo .accent{ color:var(--olive); font-weight:400; }
+  nav.main-nav{ display:flex; gap:30px; align-items:center; }
+  nav.main-nav a{
+    font-size:14px; color:#000; display:flex; align-items:center; gap:6px;
+  }
+  nav.main-nav a:hover{ color:var(--adisun-blue); }
+  nav.main-nav .badge{
+    background:rgba(255,255,255,0.15); border-radius:50%;
+    width:18px; height:18px; font-size:11px; display:flex; align-items:center; justify-content:center;
+  }
+
+  /* ---------- Product detail section (replaces hero + product grid) ---------- */
+  .product-detail{
+    max-width:1200px; margin:0 auto;
+    padding:60px 24px 90px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:60px;
+    align-items:start;
+  }
+  .product-detail .image-col img{
+    width:100%;
+    aspect-ratio:1/1;
+    object-fit:cover;
+    background:var(--paper-dim);
+  }
+
+  /* ---------- Product image carousel (this page only) ---------- */
+  .carousel{
+    position:relative;
+    aspect-ratio:1/1;
+    overflow:hidden;
+    background:var(--paper-dim);
+  }
+  .carousel-track{
+    display:flex;
+    height:100%;
+    transition:transform 0.45s ease;
+  }
+  .carousel-img{
+    height:100%;
+    object-fit:cover;
+    flex-shrink:0;
+  }
+  .carousel-arrow{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    background:rgba(255,255,255,0.85);
+    border:none;
+    width:36px; height:36px;
+    border-radius:50%;
+    font-size:15px;
+    color:var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    transition:0.2s;
+  }
+  .carousel-arrow:hover{ background:#fff; }
+  .carousel-arrow.prev{ left:14px; }
+  .carousel-arrow.next{ right:14px; }
+  .carousel-dots{
+    position:absolute;
+    bottom:14px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    gap:8px;
+  }
+  .carousel-dots .dot{
+    width:8px; height:8px;
+    border-radius:50%;
+    background:rgba(255,255,255,0.7);
+    border:1px solid rgba(0,0,0,0.2);
+    cursor:pointer;
+    transition:0.2s;
+  }
+  .carousel-dots .dot.active{
+    background:var(--adisun-blue);
+    border-color:var(--adisun-blue);
+  }
+  .carousel-caption{
+    position:absolute;
+    top:14px;
+    left:14px;
+    background:rgba(255,255,255,0.85);
+    color:var(--ink);
+    font-family:var(--mono);
+    font-size:11px;
+    letter-spacing:0.5px;
+    text-transform:uppercase;
+    padding:5px 10px;
+  }
+  .product-detail .text-col{
+    padding-right:12px;
+  }
+  .product-detail .cat{
+    font-family:var(--mono); font-size:11px; color:var(--adisun-blue);
+    letter-spacing:1.5px; text-transform:uppercase; margin-bottom:14px;
+  }
+  .product-detail h1{
+    font-family:var(--disp); font-weight:700; font-size:42px;
+    text-transform:uppercase; letter-spacing:0.3px;
+    margin-bottom:24px;
+    line-height:1.05;
+  }
+  .product-detail .details{
+    color:var(--steel); font-size:18px; line-height:1.9;
+  }
+  .product-detail .details p{
+    margin-bottom:18px;
+  }
+/*--------------Section Headings -------------- */
+  .product-detail h2.section-heading{
+    font-family:var(--disp); font-weight:700; font-size:22px;
+    text-transform:uppercase; letter-spacing:0.3px;
+    color:var(--ink);
+    margin:32px 0 14px;
+  }
+/*--------------Feature / Application Lists -------------- */
+  .feature-list{
+    margin-bottom:18px;
+  }
+  .feature-list li{
+    position:relative;
+    padding-left:20px;
+    margin-bottom:10px;
+    font-size:15px;
+    color:var(--steel);
+  }
+  .feature-list li::before{
+    content:'';
+    position:absolute;
+    left:0; top:9px;
+    width:7px; height:7px;
+    background:var(--adisun-blue);
+  }
+  .feature-list li strong{
+    color:var(--ink);
+  }
+/*-------------- Checkmark variant for Key Features -------------- */
+  .feature-list.checklist li{
+    padding-left:26px;
+    margin-bottom:14px;
+  }
+  .feature-list.checklist li::before{
+    content:'\2713';
+    width:auto; height:auto;
+    background:none;
+    top:0;
+    left:0;
+    color:var(--olive);
+    font-weight:700;
+    font-size:15px;
+  }
+/*--------------Table Section -------------- */
+.spec-table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:10px;
+}
+.spec-table th,
+.spec-table td{
+  text-align:left;
+  padding:12px 14px;
+  border-bottom:1px solid var(--line);
+  font-size:14px;
+}
+.spec-table th{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:var(--adisun-blue);
+  border-bottom:2px solid var(--ink);
+}
+.spec-table td:first-child{
+  color:var(--ink);
+  font-weight:600;
+}
+.spec-table td:last-child{
+  color:var(--steel);
+}
+  /* Price display optional — uncomment to show pricing
+  .product-detail .price{ font-family:var(--mono); font-weight:600; font-size:20px; margin-top:24px; color:var(--ink); }
+  */
+  .back-link{
+    display:inline-block; margin:24px 24px 0; font-family:var(--mono); font-size:12px;
+    letter-spacing:1px; text-transform:uppercase; color:var(--steel);
+  }
+  .back-link:hover{ color:var(--adisun-blue); }
+
+  /* ---------- Contact Details (same as home page) ---------- */
+  .info-block{
+    background: #cae8ff; color:#000;
+    padding:30px 18px;
+    text-align:center;
+  }
+  .info-block h2{
+    font-weight:400;
+    font-size:30px;
+    margin-bottom:50px;
+  }
+  .info-block-bottom{
+    max-width:800px;
+    margin:0 auto;
+    display:flex;
+    align-items:center;
+    gap:60px;
+  }
+  .info-block-bottom .pitch{
+    flex:1;
+    text-align:center;
+    color:#1c1c1c;
+    font-size:24px;
+    line-height:1.8;
+  }
+  .contact-list{
+    flex:1;
+    list-style:none;
+    margin:0;
+    padding:0;
+    text-align:left;
+  }
+  .contact-list li{
+    color:#000;
+    font-size:18px;
+    line-height:1.8;
+  }
+  .contact-list li strong{
+    color:var(--ink);
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    padding:24px; display:flex; justify-content:space-between; align-items:center;
+    max-width:1100px; margin:0 auto; font-size:12.5px; color:#7a7a72; flex-wrap:wrap; gap:10px;
+  }
+  footer a{ color:var(--olive); }
+
+  @media (max-width:900px){
+    .product-detail{ grid-template-columns:1fr; }
+    .product-detail .image-col{ position:static; }
+    .product-detail .text-col{ max-height:none; overflow-y:visible; padding-right:0; }
+    .info-block-bottom{ flex-direction:column; gap:30px; }
+    .info-block-bottom .pitch{ text-align:center; }
+  }
+  @media (max-width:640px){
+    nav.main-nav{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="site">
+  <div class="header-inner">
+    <img src="WebsiteAssets/adisunEnhanced.png" alt="Site Logo" class="logo">
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="index.html#products">Products</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<a href="index.html#products" class="back-link">&larr; Back to Products</a>
+
+<!-- ================= PRODUCT DETAIL ================= -->
+<section class="product-detail">
+  <div class="image-col">
+    <div class="carousel" id="gunCarousel">
+      <div class="carousel-track" id="gunCarouselTrack">
+        <img class="carousel-img" src="WebsiteAssets/mmaDispenser400.jpeg" alt="MMA Dispensing Gun — 400 mL Cartridge">
+        <img class="carousel-img" src="WebsiteAssets/mmaDispenser50.jpeg" alt="MMA Dispensing Gun — 50 mL Cartridge">
+      </div>
+      <div class="carousel-caption" id="gunCarouselCaption">400 mL</div>
+      <button class="carousel-arrow prev" type="button" aria-label="Previous image" onclick="moveGunCarousel(-1)">&#10094;</button>
+      <button class="carousel-arrow next" type="button" aria-label="Next image" onclick="moveGunCarousel(1)">&#10095;</button>
+      <div class="carousel-dots" id="gunCarouselDots"></div>
+    </div>
+  </div>
+  <div class="text-col">
+    <div class="cat">CoreFix &mdash; Application Tools</div>
+    <h1>MMA Dispensing Gun</h1>
+    <div class="details">
+      <p>Professional-grade dispensing gun designed for precise, controlled application of two-component MMA (Methyl Methacrylate) adhesive from 50 mL or 400 mL cartridges. Provides smooth and consistent material dispensing while reducing waste and ensuring accurate adhesive application.</p>
+    </div>
+
+    <h2 class="section-heading">Key Features</h2>
+    <ul class="feature-list checklist">
+      <li><strong>Precise Control:</strong> Enables controlled, consistent application of two-component MMA adhesive</li>
+      <li><strong>Dual Cartridge Compatibility:</strong> Works with both 50 mL and 400 mL side-by-side cartridges</li>
+      <li><strong>Smooth Dispensing:</strong> Delivers uniform material flow for reliable, even bead lines</li>
+      <li><strong>Reduced Waste:</strong> Controlled trigger action minimizes excess adhesive use</li>
+      <li><strong>Professional-Grade Build:</strong> Designed for repeated, reliable use in demanding work environments</li>
+      <li><strong>Accurate Application:</strong> Supports consistent mix ratio delivery for dependable bond quality</li>
+    </ul>
+
+    <h2 class="section-heading">Suitable Applications</h2>
+    <ul class="feature-list">
+      <li>Dispensing two-component MMA structural adhesives, such as CoreBond GP-0416</li>
+      <li>Structural bonding of engineering plastics and composite assemblies</li>
+      <li>Metal bonding applications requiring consistent adhesive flow</li>
+      <li>Industrial, workshop, and field assembly and repair work</li>
+    </ul>
+
+    <h2 class="section-heading">Product Specifications</h2>
+    <div class="details">
+      <table class="spec-table">
+        <thead>
+          <tr>
+            <th>Property</th>
+            <th>Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Cartridge Compatibility</td><td>50 mL and 400 mL side-by-side cartridges</td></tr>
+          <tr><td>Dispensing Action</td><td>Manual trigger-action</td></tr>
+          <tr><td>Mix Ratio Delivery</td><td>1:1 side-by-side dispensing</td></tr>
+          <tr><td>Recommended Use</td><td>Two-component MMA structural adhesives</td></tr>
+          <tr><td>Compatible Accessories</td><td>Static mixing nozzles (e.g. 10-24 element)</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 class="section-heading">Packaging</h2>
+    <ul class="feature-list">
+      <li><strong>Available Configurations:</strong> Compatible with 50 mL and 400 mL cartridges</li>
+    </ul>
+
+    <!-- <div class="price">Dhs. 0.00</div> -->
+  </div>
+</section>
+
+<!-- ================= CONTACT DETAILS ================= -->
+<div class="info-block">
+  <h2>Contact Us</h2>
+  <div class="info-block-bottom">
+    <p class="pitch">For business solutions,<br> get in touch with us here.</p>
+    <ul class="contact-list">
+      <li><strong>Company Name</strong> Adisun FZ-LLC</li>
+      <li><strong>Phone</strong> +971 50 474 7249</li>
+      <li><strong>Email</strong> business.adisun@gmail.com</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer id="contact">
+  <span>Copyright 2026, Your Company</span>
+  <a href="#">Design and coding by Your Team</a>
+</footer>
+
+<script>
+/* ---------------- Product image carousel ---------------- */
+(function(){
+  const track   = document.getElementById('gunCarouselTrack');
+  const dotsEl  = document.getElementById('gunCarouselDots');
+  const caption = document.getElementById('gunCarouselCaption');
+  const imgs    = Array.from(track.querySelectorAll('.carousel-img'));
+  const count   = imgs.length;
+  const labels  = ['400 mL', '50 mL'];
+  let index = 0;
+
+  /* size the track and each slide so percentages line up */
+  track.style.width = (count * 100) + '%';
+  imgs.forEach(img => { img.style.width = (100 / count) + '%'; });
+
+  /* build the dot indicators */
+  dotsEl.innerHTML = '';
+  imgs.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(dot);
+  });
+
+  function update(){
+    track.style.transform = `translateX(-${index * (100 / count)}%)`;
+    dotsEl.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === index));
+    if (caption) caption.textContent = labels[index] || '';
+  }
+
+  function goTo(i){
+    index = (i + count) % count;
+    update();
+  }
+
+  window.moveGunCarousel = function(dir){ goTo(index + dir); };
+
+  update();
+})();
+</script>
+
+</body>
+</html>
